@@ -1,0 +1,62 @@
+package com.virtualshop;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+
+public class MainActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+		
+		Map<String, String> params = new HashMap<String, String>();
+		ServerConnection.sharedInstance().getRequest("/list/", params, new AsyncHttpResponseHandler()
+		        {
+		            @Override
+		            public void onSuccess(String js) 
+		            {
+		                super.onSuccess(js);
+		                System.out.println("LIST Post Request Succesfull");
+
+		                JSONArray jsonList;
+		                try 
+		                {
+		                    jsonList = new JSONArray(js);
+		                        for(int i = 0; i < jsonList.length(); i++) {
+		                            JSONObject jsonElem = (JSONObject) jsonList.get(i);
+		                            System.out.println(jsonElem.toString());
+		                            }
+		                }  
+		                catch (JSONException e) {
+		                    System.out.println(e);
+		                }       
+		            }
+
+		            @SuppressWarnings("deprecation")
+		            @Override
+		            public void onFailure(Throwable arg0) {
+		                System.out.println("LIST Post Request Failed " + arg0.getMessage());
+		                super.onFailure(arg0);
+		            }
+		        });
+
+
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+}
