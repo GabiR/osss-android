@@ -17,8 +17,6 @@ import android.app.Activity;
 import android.view.Menu;
 
 public class MainActivity extends Activity {
-	
-	private static AsyncHttpClient client;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +25,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		Map<String, String> params = new HashMap<String, String>();
-		client = new AsyncHttpClient();
+		AsyncHttpClient client = new AsyncHttpClient();
 		client.get("http://www.google.com", new AsyncHttpResponseHandler() {
 
 		    @Override
