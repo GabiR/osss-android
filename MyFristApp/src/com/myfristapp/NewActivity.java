@@ -1,0 +1,87 @@
+package com.myfristapp;
+import java.util.ArrayList;
+
+import android.app.ListActivity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
+
+
+public class NewActivity extends ListActivity {
+	
+	ListView lista;
+	Button bt1;
+	
+	ArrayList<String> nume;
+	ArrayAdapter<String> adapter;
+	@Override
+	
+    public void onCreate(Bundle savedInstanceState) {
+		
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.new_activity);
+        
+        lista = (ListView) findViewById(android.R.id.list);
+        bt1 = (Button)findViewById(R.id.button1);
+        
+        nume = new ArrayList<String>();
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nume);
+        
+        // The activity is being created.
+        
+        nume.add("Maria");
+        nume.add("Diana");
+        
+        setListAdapter(adapter);
+        
+        lista.setOnItemClickListener(new OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> adaptor, View arg1, int position,
+                    long id) {
+                
+            	//A short toast if you click a contact
+            	
+                Toast.makeText(NewActivity.this, "You have clicked "+ adaptor.getItemAtPosition(position), Toast.LENGTH_SHORT).show()    ;
+            }
+
+        }); 
+        
+        lista.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adaptor, View arg1, int position,
+                    long id) {
+                
+            	//Delete a contact from the array if you hold click
+            	
+            	nume.remove(position);
+            	adapter.notifyDataSetChanged();
+				return true;
+            }
+
+        });
+        
+        bt1.setOnClickListener(new View.OnClickListener() {
+        	
+            public void onClick(View v) {
+            
+                //Add a contact
+            	
+            	nume.add("Vlad");
+            	adapter.notifyDataSetChanged();
+            	
+            	//Toast.makeText(getApplicationContext(), "You don't have permissions!", Toast.LENGTH_LONG).show();
+            	//finish();
+            }
+        });
+    }
+
+}

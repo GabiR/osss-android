@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+/home/student/ndk_workspace/.metadata/.plugins/org.eclipse.jdt.core
+54207440.index
+2786338160.index
+648747614.index

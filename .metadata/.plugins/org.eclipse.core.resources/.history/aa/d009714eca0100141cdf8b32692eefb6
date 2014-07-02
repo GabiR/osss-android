@@ -1,0 +1,21 @@
+package com.myfristapp;
+import android.app.Activity;
+import android.app.ListActivity;
+import android.os.Bundle;
+import android.widget.ListView;
+
+
+public class NewActivity extends ListActivity {
+	
+	ListView lista;
+	@Override
+    public void onCreate(Bundle savedInstanceState) {
+		
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.new_activity);
+        
+        lista = (ListView) findViewById(android.R.id.list);
+        // The activity is being created.
+    }
+
+}
